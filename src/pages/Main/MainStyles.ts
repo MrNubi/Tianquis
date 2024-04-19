@@ -63,5 +63,28 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     marginTop: 14,
   },
+  horizentalBar: {
+    width: '100%',
+    height: 15,
+    borderRadius: 15,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    marginTop: 14,
+  },
+  horizentalLine: {
+    backgroundColor: 'white',
+    width: 100,
+    borderColor: 'white',
+    borderWidth: 1,
+  },
+
+  font800: {
+    color: 'white',
+    fontFamily: 'Inter-ExtraBold',
+    fontSize: 35,
+    lineHeight: 42,
+  },
 });
 export default styles;
