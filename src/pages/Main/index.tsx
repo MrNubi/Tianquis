@@ -1,15 +1,26 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, {useState} from 'react';
-import {Text, View} from 'react-native';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
+import {Text, TextInput, View} from 'react-native';
 import WhiteBtn from '../../component/btn/whiteBtn';
 import Market from '../../img/Marcket.svg';
 import styles from './MainStyles';
 import HorizentalBar from '../../component/bar/horizentalBar';
 import BlueInput from '../../component/inputBox/BlueInputText';
-const Main = () => {
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../Layout/AppInner';
+
+type MainScreenProps = NativeStackScreenProps<RootStackParamList, 'Main'>;
+
+function Main({navigation}: MainScreenProps) {
   const [id, setID] = useState('');
   const [pw, setPW] = useState('');
+  const PwRef = useRef<TextInput | null>(null);
+
+  const navigateToSignIn = useCallback(() => {
+    navigation.navigate('SignIn');
+  }, [navigation]);
+
   return (
     <View
       style={{
@@ -28,7 +39,9 @@ const Main = () => {
         onChangeText={t => {
           setID(t);
         }}
-        onSubmitEditing={() => {}}
+        onSubmitEditing={() => {
+          PwRef.current?.focus();
+        }}
         value={id}
       />
       <BlueInput
@@ -37,17 +50,25 @@ const Main = () => {
         onChangeText={t => {
           setPW(t);
         }}
-        onSubmitEditing={() => {}}
+        onSubmitEditing={() => {
+          console.log('login action', 'id :', id, ', pw : ', pw);
+        }}
         value={pw}
         secureTextEntry
         returnKeyType="send"
+        ref={PwRef}
       />
       <WhiteBtn text="Log in" />
       <HorizentalBar text="or" />
 
-      <WhiteBtn text="Sign in" />
+      <WhiteBtn
+        text="Sign in"
+        nev={() => {
+          navigateToSignIn();
+        }}
+      />
     </View>
   );
-};
+}
 
 export default Main;

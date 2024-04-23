@@ -7,13 +7,17 @@
  */
 
 import {NavigationContainer} from '@react-navigation/native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 
 import AppInner from './src/Layout/AppInner';
 
 function App() {
-  SplashScreen.hide();
+  useEffect(() => {
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 500); //스플래시 활성화 시간
+  });
   return (
     <NavigationContainer>
       <AppInner />
