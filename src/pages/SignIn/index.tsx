@@ -8,6 +8,7 @@ import Market from '../../img/Marcket.svg';
 import BlueInput from '../../component/inputBox/BlueInputText';
 import {RootStackParamList} from '../../Layout/AppInner';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import styles from './SignStyle';
 
 type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
@@ -27,15 +28,7 @@ const SignIn = ({navigation}: SignInScreenProps) => {
   }, []);
 
   return (
-    <View
-      style={{
-        width: '100%',
-        height: '100%',
-        backgroundColor: '#50B6FF',
-        paddingTop: 94,
-
-        alignItems: 'center',
-      }}>
+    <View style={styles.container}>
       <Market />
       <View
         style={{
@@ -105,6 +98,7 @@ const SignIn = ({navigation}: SignInScreenProps) => {
         }}>
         <Text>Anota tu código de Verificación</Text>
         <Text>que te enviamos a tu E-mail.</Text>
+        <View style={{}}></View>
       </View>
 
       <WhiteBtn
