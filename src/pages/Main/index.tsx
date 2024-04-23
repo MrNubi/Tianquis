@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {Text, TextInput, View} from 'react-native';
+import {Button, Pressable, Text, TextInput, View} from 'react-native';
 import WhiteBtn from '../../component/btn/whiteBtn';
 import Market from '../../img/Marcket.svg';
 import styles from './MainStyles';
@@ -9,12 +9,14 @@ import HorizentalBar from '../../component/bar/horizentalBar';
 import BlueInput from '../../component/inputBox/BlueInputText';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../Layout/AppInner';
+import ProgressBar from '../../component/bar/ProgressBar';
 
 type MainScreenProps = NativeStackScreenProps<RootStackParamList, 'Main'>;
 
 function Main({navigation}: MainScreenProps) {
   const [id, setID] = useState('');
   const [pw, setPW] = useState('');
+  const [count, setCount] = useState(10);
   const PwRef = useRef<TextInput | null>(null);
 
   const navigateToSignIn = useCallback(() => {
@@ -31,6 +33,7 @@ function Main({navigation}: MainScreenProps) {
         alignItems: 'center',
       }}>
       <Market />
+
       <Text style={styles.font800}>Movil</Text>
       <Text style={styles.font800}>Tianguis</Text>
       <BlueInput

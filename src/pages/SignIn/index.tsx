@@ -10,6 +10,8 @@ import {RootStackParamList} from '../../Layout/AppInner';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import styles from './SignStyle';
 import BlueOneInput from '../../component/inputBox/BlueOneTextInput';
+import ProgressBar from '../../component/bar/ProgressBar';
+import Distance from '../Distance';
 
 type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
@@ -39,6 +41,14 @@ const SignIn = ({navigation}: SignInScreenProps) => {
 
   return (
     <View style={styles.container}>
+      <Distance />
+    </View>
+  );
+};
+
+export default SignIn;
+/*
+<View style={styles.container}>
       <Market />
       {EmailMod ? (
         <View style={styles.contentBox}>
@@ -153,7 +163,5 @@ const SignIn = ({navigation}: SignInScreenProps) => {
         }}
       />
     </View>
-  );
-};
 
-export default SignIn;
+*/
