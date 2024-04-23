@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, {useRef, useState} from 'react';
+import React, {useCallback, useRef, useState} from 'react';
 import {Text, TextInput, View} from 'react-native';
 import WhiteBtn from '../../component/btn/whiteBtn';
 import Market from '../../img/Marcket.svg';
@@ -21,6 +21,10 @@ const SignIn = ({navigation}: SignInScreenProps) => {
   const pwRef = useRef<TextInput | null>(null);
   const nicknameRef = useRef<TextInput | null>(null);
   const emailRef = useRef<TextInput | null>(null);
+
+  const ModChanger = useCallback(() => {
+    setEmailMod(p => !p);
+  }, []);
 
   return (
     <View
@@ -106,7 +110,7 @@ const SignIn = ({navigation}: SignInScreenProps) => {
       <WhiteBtn
         text="Sign in"
         nev={() => {
-          setEmailMod(p => !p);
+          ModChanger();
         }}
       />
     </View>
