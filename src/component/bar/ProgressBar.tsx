@@ -1,16 +1,24 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable prettier/prettier */
-import React, {useEffect, useRef} from 'react';
-import {View, StyleSheet, Animated, Text} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {
+  View,
+  StyleSheet,
+  Animated,
+  Text,
+  PanResponder,
+  GestureResponderEvent,
+  PanResponderGestureState,
+} from 'react-native';
 
 interface IStep {
   totalStep: number;
-  nowStep: number;
 }
 
-function ProgressBar({totalStep, nowStep}: IStep) {
+const ProgressBar: React.FC<IStep> = ({totalStep}: IStep) => {
   const loaderValue = useRef(new Animated.Value(0)).current;
-
+  const [nowStep, setnowStep] = useState(1);
   const load = (count: number) => {
     Animated.timing(loaderValue, {
       toValue: (count / totalStep) * 100,
@@ -25,21 +33,74 @@ function ProgressBar({totalStep, nowStep}: IStep) {
     extrapolate: 'clamp',
   });
 
-  useEffect(() => {
-    load(nowStep);
-  }, [nowStep]);
+  const [animatedX] = useState(new Animated.Value(0));
+
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onPanResponderMove: (event, gestureState) => {
+        let movedXabs = Math.round(gestureState.dx);
+        console.log(gestureState.dx, 'ss', movedXabs);
+        if (movedXabs < 0 || movedXabs > 250) {
+          return;
+        }
+
+        setnowStep(movedXabs);
+        animatedX.setValue(movedXabs);
+      },
+
+      onPanResponderRelease: (
+        e: GestureResponderEvent,
+        gestureState: PanResponderGestureState,
+      ) => {
+        let movedXabs = Math.round(gestureState.dx);
+
+        let counted = movedXabs < 0 ? 0 : movedXabs > 250 ? 250 : movedXabs;
+        let countedAbs = Math.round((counted / 250) * 100);
+        Animated.spring(animatedX, {
+          toValue: 0,
+          friction: 7,
+          useNativeDriver: false,
+        }).start();
+        load(countedAbs);
+      },
+    }),
+  ).current;
 
   return (
     <View>
       <View style={styles.bar}>
         <Animated.View
+          id={'A1'}
           style={{
+            position: 'absolute',
+            top: 0,
             backgroundColor: 'white',
             width,
-            height: 3,
+            height: 5.2,
             borderTopRightRadius: 2,
             borderBottomRightRadius: 2,
+            borderColor: 'red',
+            borderWidth: 1,
           }}
+        />
+        <Animated.View
+          id={'A2'}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            backgroundColor: 'blue',
+
+            width: 10,
+            height: 10,
+
+            borderRadius: 2,
+            borderWidth: 0.5,
+            borderColor: 'black',
+            transform: [{translateX: animatedX}],
+          }}
+          {...panResponder.panHandlers}
         />
       </View>
       <Text style={styles.step}>
@@ -47,11 +108,11 @@ function ProgressBar({totalStep, nowStep}: IStep) {
       </Text>
     </View>
   );
-}
+};
 const styles = StyleSheet.create({
   bar: {
-    width: '100%',
-    height: 1,
+    width: 242,
+    height: 5.2,
     backgroundColor: 'black',
   },
   step: {

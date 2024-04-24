@@ -33,135 +33,139 @@ const SignIn = ({navigation}: SignInScreenProps) => {
   const TextMod = useCallback(() => {
     setEmailMod(p => !p);
   }, []);
+  const navigateToDistance = useCallback(() => {
+    navigation.navigate('Distance');
+  }, [navigation]);
 
   const CodeMod = () => {
     setEmailMod(p => !p);
     console.log(codeArr[0], codeArr[1], codeArr[2], codeArr[3]);
+    navigateToDistance();
   };
 
   return (
     <View style={styles.container}>
-      <Distance />
+      <View style={styles.container}>
+        <Market />
+        {EmailMod ? (
+          <View style={styles.contentBox}>
+            <BlueInput
+              placeHolder="ID"
+              type="id"
+              onChangeText={t => {
+                setID(t);
+              }}
+              onSubmitEditing={() => {
+                pwRef.current?.focus();
+              }}
+              value={id}
+            />
+            <BlueInput
+              placeHolder="PW"
+              type="pw"
+              onChangeText={t => {
+                setPW(t);
+              }}
+              onSubmitEditing={() => {
+                nicknameRef.current?.focus();
+              }}
+              value={pw}
+              secureTextEntry
+              ref={pwRef}
+            />
+            <BlueInput
+              placeHolder="nickname"
+              type="nickname"
+              onChangeText={t => {
+                setNickname(t);
+              }}
+              onSubmitEditing={() => {
+                emailRef.current?.focus();
+              }}
+              value={Nickname}
+              ref={nicknameRef}
+            />
+            <BlueInput
+              placeHolder="email"
+              type="email"
+              onChangeText={t => {
+                setEmail(t);
+              }}
+              onSubmitEditing={() => {}}
+              value={Email}
+              returnKeyType="send"
+              ref={emailRef}
+            />
+          </View>
+        ) : (
+          <View style={styles.contentBox2}>
+            <Text style={styles.emailText}>
+              Anota tu código de Verificación{`\n`}
+              {`\n`}
+              {`\n`}que te enviamos a tu E-mail.
+            </Text>
+
+            <View
+              style={{
+                flexDirection: 'row',
+                width: 250,
+                height: 80,
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}>
+              <BlueOneInput
+                placeHolder=""
+                onChangeText={t => {
+                  codeArr[0] = t;
+                  codeRef1.current?.focus();
+                }}
+                onSubmitEditing={() => {}}
+                ref={codeRef0}
+              />
+              <BlueOneInput
+                placeHolder=""
+                onChangeText={t => {
+                  codeArr[1] = t;
+                  codeRef2.current?.focus();
+                }}
+                onSubmitEditing={() => {}}
+                ref={codeRef1}
+              />
+              <BlueOneInput
+                placeHolder=""
+                onChangeText={t => {
+                  codeArr[2] = t;
+                  codeRef3.current?.focus();
+                }}
+                onSubmitEditing={() => {}}
+                ref={codeRef2}
+              />
+              <BlueOneInput
+                placeHolder=""
+                onChangeText={t => {
+                  codeArr[3] = t;
+                }}
+                returnKeyType="send"
+                onSubmitEditing={() => {}}
+                ref={codeRef3}
+              />
+            </View>
+          </View>
+        )}
+
+        <WhiteBtn
+          text="Sign in"
+          nev={() => {
+            EmailMod ? TextMod() : CodeMod();
+          }}
+        />
+      </View>
     </View>
   );
 };
 
 export default SignIn;
 /*
-<View style={styles.container}>
-      <Market />
-      {EmailMod ? (
-        <View style={styles.contentBox}>
-          <BlueInput
-            placeHolder="ID"
-            type="id"
-            onChangeText={t => {
-              setID(t);
-            }}
-            onSubmitEditing={() => {
-              pwRef.current?.focus();
-            }}
-            value={id}
-          />
-          <BlueInput
-            placeHolder="PW"
-            type="pw"
-            onChangeText={t => {
-              setPW(t);
-            }}
-            onSubmitEditing={() => {
-              nicknameRef.current?.focus();
-            }}
-            value={pw}
-            secureTextEntry
-            ref={pwRef}
-          />
-          <BlueInput
-            placeHolder="nickname"
-            type="nickname"
-            onChangeText={t => {
-              setNickname(t);
-            }}
-            onSubmitEditing={() => {
-              emailRef.current?.focus();
-            }}
-            value={Nickname}
-            ref={nicknameRef}
-          />
-          <BlueInput
-            placeHolder="email"
-            type="email"
-            onChangeText={t => {
-              setEmail(t);
-            }}
-            onSubmitEditing={() => {}}
-            value={Email}
-            returnKeyType="send"
-            ref={emailRef}
-          />
-        </View>
-      ) : (
-        <View style={styles.contentBox2}>
-          <Text style={styles.emailText}>
-            Anota tu código de Verificación{`\n`}
-            {`\n`}
-            {`\n`}que te enviamos a tu E-mail.
-          </Text>
 
-          <View
-            style={{
-              flexDirection: 'row',
-              width: 250,
-              height: 80,
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
-            <BlueOneInput
-              placeHolder=""
-              onChangeText={t => {
-                codeArr[0] = t;
-                codeRef1.current?.focus();
-              }}
-              onSubmitEditing={() => {}}
-              ref={codeRef0}
-            />
-            <BlueOneInput
-              placeHolder=""
-              onChangeText={t => {
-                codeArr[1] = t;
-                codeRef2.current?.focus();
-              }}
-              onSubmitEditing={() => {}}
-              ref={codeRef1}
-            />
-            <BlueOneInput
-              placeHolder=""
-              onChangeText={t => {
-                codeArr[2] = t;
-                codeRef3.current?.focus();
-              }}
-              onSubmitEditing={() => {}}
-              ref={codeRef2}
-            />
-            <BlueOneInput
-              placeHolder=""
-              onChangeText={t => {
-                codeArr[3] = t;
-              }}
-              returnKeyType="send"
-              onSubmitEditing={() => {}}
-              ref={codeRef3}
-            />
-          </View>
-        </View>
-      )}
-
-      <WhiteBtn
-        text="Sign in"
-        nev={() => {
-          EmailMod ? TextMod() : CodeMod();
-        }}
-      />
-    </View>
 
 */
