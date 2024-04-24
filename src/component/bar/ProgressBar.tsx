@@ -20,8 +20,9 @@ const ProgressBar: React.FC<IStep> = ({totalStep}: IStep) => {
   const loaderValue = useRef(new Animated.Value(0)).current;
   const [nowStep, setnowStep] = useState(1);
   const load = (count: number) => {
+    console.log((count / totalStep) * 10, 'hh');
     Animated.timing(loaderValue, {
-      toValue: (count / totalStep) * 100,
+      toValue: (count / totalStep) * 10,
       duration: 500,
       useNativeDriver: false,
     }).start();
@@ -62,6 +63,7 @@ const ProgressBar: React.FC<IStep> = ({totalStep}: IStep) => {
           friction: 7,
           useNativeDriver: false,
         }).start();
+        console.log(countedAbs, 'd');
         load(countedAbs);
       },
     }),
@@ -87,9 +89,9 @@ const ProgressBar: React.FC<IStep> = ({totalStep}: IStep) => {
         <Animated.View
           id={'A2'}
           style={{
-            position: 'absolute',
+            position: 'relative',
             top: 0,
-            left: 0,
+            left: width,
             backgroundColor: 'blue',
 
             width: 10,
