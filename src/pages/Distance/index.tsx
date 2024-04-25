@@ -13,6 +13,7 @@ import BlueOneInput from '../../component/inputBox/BlueOneTextInput';
 import ProgressBar from '../../component/bar/ProgressBar';
 import BluePin from '../../img/BluePine.svg';
 import DragBox from '../../component/test/DragBox';
+import ProgressBarTest from '../../component/bar/ProgressiveBarTest';
 
 type DistanceScreenProps = NativeStackScreenProps<
   RootStackParamList,
@@ -28,6 +29,7 @@ function Distance({navigation}: DistanceScreenProps) {
         ¿Qué tan lejos{`\n`} puedes viajar?
       </Text>
       <ProgressBar totalStep={4} />
+      <ProgressBarTest />
       <Button onPress={() => setCount(prev => ++prev)} title="1증가" />
       <Button onPress={() => setCount(prev => --prev)} title="1감소" />
 

@@ -20,9 +20,9 @@ const ProgressBar: React.FC<IStep> = ({totalStep}: IStep) => {
   const loaderValue = useRef(new Animated.Value(0)).current;
   const [nowStep, setnowStep] = useState(1);
   const load = (count: number) => {
-    console.log((count / totalStep) * 10, 'hh');
+    console.log((count / totalStep) * 100, 'hh');
     Animated.timing(loaderValue, {
-      toValue: (count / totalStep) * 10,
+      toValue: (count / totalStep) * 100,
       duration: 500,
       useNativeDriver: false,
     }).start();
@@ -57,7 +57,7 @@ const ProgressBar: React.FC<IStep> = ({totalStep}: IStep) => {
         let movedXabs = Math.round(gestureState.dx);
 
         let counted = movedXabs < 0 ? 0 : movedXabs > 250 ? 250 : movedXabs;
-        let countedAbs = Math.round((counted / 250) * 100);
+        let countedAbs = Math.round(counted / 250) * 4;
         Animated.spring(animatedX, {
           toValue: 0,
           friction: 7,
@@ -71,12 +71,14 @@ const ProgressBar: React.FC<IStep> = ({totalStep}: IStep) => {
 
   return (
     <View>
-      <View style={styles.bar}>
+      <View style={styles.container}>
+        <View style={styles.bar}></View>
         <Animated.View
           id={'A1'}
           style={{
+            zIndex: 2,
             position: 'absolute',
-            top: 0,
+            top: 25,
             backgroundColor: 'white',
             width,
             height: 5.2,
@@ -84,18 +86,18 @@ const ProgressBar: React.FC<IStep> = ({totalStep}: IStep) => {
             borderBottomRightRadius: 2,
             borderColor: 'red',
             borderWidth: 1,
-          }}
-        />
+          }}></Animated.View>
         <Animated.View
           id={'A2'}
           style={{
-            position: 'relative',
-            top: 0,
-            left: width,
+            zIndex: 3,
+            position: 'absolute',
+            top: 15,
+            left: 0,
             backgroundColor: 'blue',
 
-            width: 10,
-            height: 10,
+            width: 20,
+            height: 20,
 
             borderRadius: 2,
             borderWidth: 0.5,
@@ -112,7 +114,16 @@ const ProgressBar: React.FC<IStep> = ({totalStep}: IStep) => {
   );
 };
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'pink',
+    flexDirection: 'row',
+    width: '100%',
+    height: 50,
+    alignItems: 'center',
+  },
   bar: {
+    flexDirection: 'row',
+    zIndex: -1,
     width: 242,
     height: 5.2,
     backgroundColor: 'black',

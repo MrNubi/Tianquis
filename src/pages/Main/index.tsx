@@ -22,7 +22,11 @@ function Main({navigation}: MainScreenProps) {
   const navigateToSignIn = useCallback(() => {
     navigation.navigate('SignIn');
   }, [navigation]);
+  const navigateToDistance = useCallback(() => {
+    navigation.navigate('Distance');
+  }, [navigation]);
 
+  navigateToDistance();
   return (
     <View
       style={{
