@@ -22,11 +22,11 @@ function Main({navigation}: MainScreenProps) {
   const navigateToSignIn = useCallback(() => {
     navigation.navigate('SignIn');
   }, [navigation]);
-  const navigateToDistance = useCallback(() => {
-    navigation.navigate('Distance');
-  }, [navigation]);
+  // const navigateToMakeingZone = useCallback(() => {
+  //   navigation.navigate('Distance');
+  // }, [navigation]);
 
-  navigateToDistance();
+  // navigateToMakeingZone();
   return (
     <View
       style={{
