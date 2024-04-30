@@ -36,6 +36,9 @@ function ItemView({navigation}: ItemViewScreenProps) {
   const navigateToItemView = useCallback(() => {
     navigation.navigate('Distance');
   }, [navigation]);
+  const SearchRef = useRef<TextInput | null>(null);
+
+  const [serchText, setSerchText] = useState('');
   const DistanceInherritance = storage.getString('distance');
   return (
     <View style={styles.container}>
@@ -44,10 +47,12 @@ function ItemView({navigation}: ItemViewScreenProps) {
       {/* searchbar bar */}
       <SearchBarGray
         placeHolder=""
-        onChangeText={}
-        onSubmitEditing={}
-        value={}
-      />
+        onChangeText={t => setSerchText(t)}
+        onSubmitEditing={() => {
+          console.log('d : ', serchText);
+        }}
+        value={serchText}
+        ref={SearchRef}></SearchBarGray>
       {/* navigation bar */}
       <BannerBar />
       {/* ItemView */}
