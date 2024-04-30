@@ -22,6 +22,10 @@ import BluePin from '../../img/BluePine.svg';
 import DragBox from '../../component/test/DragBox';
 import ProgressBarTest from '../../component/bar/ProgressiveBarTest';
 import storage from '../../mmkv';
+import Header from '../../component/header/itemViewHeader';
+import {SearchBar} from 'react-native-screens';
+import SearchBarGray from '../../component/bar/SearchBar';
+import BannerBar from '../../component/bar/BannerBar';
 
 type ItemViewScreenProps = NativeStackScreenProps<
   RootStackParamList,
@@ -35,6 +39,19 @@ function ItemView({navigation}: ItemViewScreenProps) {
   const DistanceInherritance = storage.getString('distance');
   return (
     <View style={styles.container}>
+      {/* header*/}
+      <Header />
+      {/* searchbar bar */}
+      <SearchBarGray
+        placeHolder=""
+        onChangeText={}
+        onSubmitEditing={}
+        value={}
+      />
+      {/* navigation bar */}
+      <BannerBar />
+      {/* ItemView */}
+
       <BluePin />
       <Text style={styles.distanceText}>{DistanceInherritance}</Text>
     </View>

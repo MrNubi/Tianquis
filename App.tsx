@@ -11,6 +11,7 @@ import React, {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 
 import AppInner from './src/Layout/AppInner';
+import {StatusBar} from 'react-native';
 
 function App() {
   useEffect(() => {
@@ -20,6 +21,7 @@ function App() {
   });
   return (
     <NavigationContainer>
+      <StatusBar hidden={true} />
       <AppInner />
     </NavigationContainer>
   );
