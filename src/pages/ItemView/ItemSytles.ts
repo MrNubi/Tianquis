@@ -5,8 +5,13 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
-    backgroundColor: 'white',
-
+    backgroundColor: '',
+    alignItems: 'center',
+  },
+  container2: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'gry',
     alignItems: 'center',
   },
   contentBox: {
@@ -15,6 +20,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginVertical: 75,
+    backgroundColor: 'white',
   },
   contentBox2: {
     width: '100%',

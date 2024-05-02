@@ -4,11 +4,12 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
-    width: '90%',
+    width: 350,
     height: 110,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   titleImg: {
     width: 100,
@@ -18,29 +19,35 @@ export const styles = StyleSheet.create({
   contentArea: {
     height: 60,
     width: 225,
+    paddingLeft: 10,
+    justifyContent: 'space-between',
   },
   contentText1: {
-    height: 20,
+    height: 18,
     width: 225,
     textAlign: 'left',
     color: 'black',
     fontFamily: 'Inter-SemiBold',
     fontSize: 15,
     lineHeight: 18.25,
+    alignItems: 'center',
   },
   contentText2: {
-    height: 20,
+    height: 15,
     width: 225,
     textAlign: 'left',
-    color: 'black',
+    color: 'gray',
     fontFamily: 'Inter-SemiBold',
     fontSize: 10,
     lineHeight: 12.25,
+    alignItems: 'center',
   },
   statusArea: {
+    paddingLeft: 10,
     height: 40,
     width: 225,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
 });
