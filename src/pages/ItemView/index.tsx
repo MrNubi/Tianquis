@@ -1,36 +1,21 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {useCallback, useRef, useState} from 'react';
-import {
-  Button,
-  DeviceEventEmitter,
-  Pressable,
-  Text,
-  TextInput,
-  View,
-  ViewComponent,
-} from 'react-native';
-import WhiteBtn from '../../component/btn/whiteBtn';
-import Pine from '../../img/BluePine.svg';
+import {Pressable, Text, TextInput, View} from 'react-native';
 
-import BlueInput from '../../component/inputBox/BlueInputText';
 import {RootStackParamList} from '../../Layout/AppInner';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import styles from './ItemSytles';
-import BlueOneInput from '../../component/inputBox/BlueOneTextInput';
-import ProgressBar from '../../component/bar/ProgressBar';
-import BluePin from '../../img/BluePine.svg';
-import DragBox from '../../component/test/DragBox';
-import ProgressBarTest from '../../component/bar/ProgressiveBarTest';
 import storage from '../../mmkv';
 import Header from '../../component/header/itemViewHeader';
-import {SearchBar} from 'react-native-screens';
 import SearchBarGray from '../../component/bar/SearchBar';
 import BannerBar from '../../component/bar/BannerBar';
 import {FlashList} from '@shopify/flash-list';
 import ItemViewItem from '../../component/item/ItemViewItem';
 import {Data1} from '../../mmkv/data';
 import {Dimensions} from 'react-native';
+import ProgressBarTest from '../../component/bar/ProgressiveBarTest';
+import V from '../../img/V.svg';
 
 type ItemViewScreenProps = NativeStackScreenProps<
   RootStackParamList,
@@ -43,25 +28,62 @@ function ItemView({navigation}: ItemViewScreenProps) {
   }, [navigation]);
   const SearchRef = useRef<TextInput | null>(null);
   const [serchText, setSerchText] = useState('');
+
   const DistanceInherritance = storage.getString('distance');
+  const [distanceText, setDistanceText] = useState(
+    DistanceInherritance !== undefined ? DistanceInherritance : '1km',
+  );
   const {width} = Dimensions.get('window');
-  console.log(width, 'sds');
   const widthABS = Math.floor(width);
+  console.log(width, widthABS, 'sds');
+  const [spinner, setSpinner] = useState(false);
+  const spinAction = () => {
+    setSpinner(p => !p);
+    console.log(spinner);
+  };
+
   return (
     <View style={styles.container}>
       {/* header*/}
-      <Header />
+      <Header DT={distanceText} spinner={spinner} setSpinner={spinAction} />
       {/* searchbar bar */}
-      <SearchBarGray
-        placeHolder=""
-        onChangeText={t => setSerchText(t)}
-        onSubmitEditing={() => {
-          console.log('d : ', serchText);
-        }}
-        value={serchText}
-        ref={SearchRef}></SearchBarGray>
-      {/* navigation bar */}
-      <BannerBar />
+      {!spinner ? (
+        <View style={{width: '100%', height: 90}}>
+          <SearchBarGray
+            placeHolder=""
+            onChangeText={t => setSerchText(t)}
+            onSubmitEditing={() => {
+              console.log('d : ', serchText);
+            }}
+            value={serchText}
+            ref={SearchRef}></SearchBarGray>
+          {/* navigation bar */}
+          <BannerBar />
+        </View>
+      ) : (
+        <View style={{justifyContent: 'center', backgroundColor: 'yellow'}}>
+          <Text style={styles.distanceText}>
+            ¿Qué tan lejos{`\n`}
+            puedes viajar?
+          </Text>
+          <ProgressBarTest
+            setDistanceText={t => {
+              setDistanceText(t);
+            }}
+          />
+          <View
+            style={{
+              padding: 20,
+              backgroundColor: 'green',
+              justifyContent: 'center',
+              alignItems: 'center',
+              transform: [{rotate: '180deg'}],
+            }}>
+            <V onPress={spinAction} />
+          </View>
+        </View>
+      )}
+
       {/* ItemView */}
       <View
         style={{
@@ -73,11 +95,7 @@ function ItemView({navigation}: ItemViewScreenProps) {
         <FlashList
           data={Data1}
           renderItem={({item}) => <ItemViewItem item={item} />}
-          estimatedItemSize={200}
-          estimatedListSize={{
-            height: 200,
-            width: widthABS,
-          }}
+          estimatedItemSize={widthABS}
         />
       </View>
     </View>

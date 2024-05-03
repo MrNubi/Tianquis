@@ -14,7 +14,11 @@ import {
 } from 'react-native';
 import storage from '../../mmkv';
 
-function ProgressBarTest() {
+interface props {
+  setDistanceText?: (t: string) => void | undefined;
+}
+
+function ProgressBarTest({setDistanceText}: props) {
   const loaderValue = useRef(new Animated.Value(0)).current;
   const totalStep = 4;
   const [nowStep, setNowStep] = useState(0);
@@ -31,6 +35,10 @@ function ProgressBarTest() {
     }).start(() => {
       setColorStep(nowStep);
       storage.set('distance', `${nowStep}`);
+      if (setDistanceText != undefined) {
+        setDistanceText(`${nowStep}`);
+        console.log('setDT', `${nowStep}`);
+      }
     });
   };
 

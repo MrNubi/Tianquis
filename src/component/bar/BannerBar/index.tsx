@@ -3,7 +3,7 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import {styles} from './styles';
-import BwGradetion from '../../../img/BwGradetion.svg';
+import BwGradetion from '../../../img/GradetionBw.svg';
 
 function BannerBar() {
   return (
