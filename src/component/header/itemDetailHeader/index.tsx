@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
-import React, {useState, useEffect} from 'react';
-import {View, Animated, Pressable, Text} from 'react-native';
-import MarcketBlue from '../../../img/MarcketBlue.svg';
+import React from 'react';
+import {View, Pressable, Text} from 'react-native';
+import MarcketBlue from '../../../img/MarketBlue.svg';
 import Social from '../../../img/Social.svg';
-import Message from '../../../img/Message.svg';
+import BackBlue from '../../../img/BackBtnBlue.svg';
+import BackWhite from '../../../img/BackBtnWhite.svg';
 import styles from './styles';
-import storage from '../../../mmkv';
+import {useNavigation} from '@react-navigation/native';
 
 interface props {
   Nevigation: () => void;
@@ -23,14 +24,19 @@ const DetailHeader = ({Nevigation}: props) => {
   //     toValue: spinner ? 0 : 1, // 180도 회전
   //     duration: 500, // 애니메이션 지속 시간 (밀리초)
   //     easing: Easing.linear, // 완화 함수
-  //     useNativeDriver: false,
+  //     useNativeDriver: false,A
   //   }).start(() => {
   //     Nevigation();
   //   });
   // };
 
-  const nevigationToProfilePage = () => {
+  const onPressProfile = () => {
     Nevigation();
+  };
+  const navigation = useNavigation();
+
+  const onPressBack = () => {
+    navigation.goBack();
   };
   const createTime = '2024-04-12  12:00';
 
@@ -39,10 +45,15 @@ const DetailHeader = ({Nevigation}: props) => {
       {/*외곽 컨테이너 뷰*/}
       <View style={styles.innerContainer1}>
         {/*아이템 컨테이너1*/}
+        <View style={{position: 'absolute', left: 14, top: 41}}>
+          <Pressable>
+            <BackBlue onPress={onPressBack} />
+          </Pressable>
+        </View>
         <MarcketBlue />
         <View style={{position: 'absolute', right: 14, top: 41}}>
           <Pressable>
-            <Social onPress={nevigationToProfilePage} />
+            <Social onPress={onPressProfile} />
           </Pressable>
         </View>
       </View>

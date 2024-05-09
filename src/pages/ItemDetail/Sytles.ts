@@ -54,6 +54,20 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 18.25,
   },
+  TitleText: {
+    textAlign: 'left',
+    color: 'black',
+    fontFamily: 'Inter-SemiBold',
+    fontSize: 30,
+    lineHeight: 36.25,
+    marginLeft: 10,
+  },
+  TitleView: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    marginBottom: 10,
+  },
 });
 
 export default styles;

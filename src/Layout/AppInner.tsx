@@ -6,6 +6,7 @@ import SignIn from '../pages/SignIn';
 import Distance from '../pages/Distance';
 import ItemView from '../pages/ItemView';
 import ItemDetail from '../pages/ItemDetail';
+import ProfilePage from '../pages/Profile';
 
 export type RootStackParamList = {
   Main: undefined;
@@ -13,6 +14,7 @@ export type RootStackParamList = {
   Distance: undefined;
   ItemView: undefined;
   ItemDetail: undefined;
+  Profile: undefined;
 };
 
 const AppInner = () => {
@@ -44,6 +46,11 @@ const AppInner = () => {
       <Stack.Screen
         name="ItemDetail"
         component={ItemDetail}
+        options={{headerShown: false, statusBarHidden: true}}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={ProfilePage}
         options={{headerShown: false, statusBarHidden: true}}
       />
     </Stack.Navigator>

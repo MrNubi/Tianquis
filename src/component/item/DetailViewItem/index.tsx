@@ -1,16 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
-import {Text, View} from 'react-native';
+import {Text, View, Image} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import {imageUrlArr} from '../../../mmkv/data';
 
 const DetailViewItem = (item: any) => {
-  console.log(item);
-  const itemArr = item.item;
+  console.log(item, item.item.url);
+  const itemUri = item.item.url;
+
   return (
     <View style={styles.container}>
-      <img src={itemArr.url} style={styles.titleImg} />
+      <Image
+        source={{
+          uri: itemUri,
+        }}
+        style={styles.titleImg}
+      />
     </View>
   );
 };

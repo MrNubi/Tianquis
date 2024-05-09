@@ -20,9 +20,10 @@ interface props {
   spinner: boolean;
   DT: string;
   setSpinner: () => void;
+  onPressProfile: () => void;
 }
 
-const Header = ({spinner, DT, setSpinner}: props) => {
+const Header = ({spinner, DT, setSpinner, onPressProfile}: props) => {
   const [spinValue] = useState(new Animated.Value(0));
   const [distasnce, setDistance] = useState(
     storage.getString('distance') ? storage.getString('distance') : '1km',
@@ -88,7 +89,7 @@ const Header = ({spinner, DT, setSpinner}: props) => {
             <Message />
           </Pressable>
           <Pressable style={styles.distanceBtn}>
-            <Social />
+            <Social onPress={onPressProfile} />
           </Pressable>
         </View>
       </View>

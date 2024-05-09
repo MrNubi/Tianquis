@@ -23,8 +23,11 @@ type ItemViewScreenProps = NativeStackScreenProps<
 >;
 
 function ItemView({navigation}: ItemViewScreenProps) {
-  const navigateToItemView = useCallback(() => {
-    navigation.navigate('Distance');
+  const navigateToProfile = useCallback(() => {
+    navigation.navigate('Profile');
+  }, [navigation]);
+  const navigateToDetailView = useCallback(() => {
+    navigation.navigate('ItemDetail');
   }, [navigation]);
   const SearchRef = useRef<TextInput | null>(null);
   const [serchText, setSerchText] = useState('');
@@ -45,7 +48,12 @@ function ItemView({navigation}: ItemViewScreenProps) {
   return (
     <View style={styles.container}>
       {/* header*/}
-      <Header DT={distanceText} spinner={spinner} setSpinner={spinAction} />
+      <Header
+        DT={distanceText}
+        spinner={spinner}
+        setSpinner={spinAction}
+        onPressProfile={navigateToProfile}
+      />
       {/* searchbar bar */}
       {!spinner ? (
         <View style={{width: '100%', height: 90}}>
@@ -94,7 +102,9 @@ function ItemView({navigation}: ItemViewScreenProps) {
         }}>
         <FlashList
           data={Data1}
-          renderItem={({item}) => <ItemViewItem item={item} />}
+          renderItem={({item}) => (
+            <ItemViewItem item={item} onPress={() => navigateToDetailView()} />
+          )}
           estimatedItemSize={widthABS}
         />
       </View>

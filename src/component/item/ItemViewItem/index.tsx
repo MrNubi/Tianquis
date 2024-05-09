@@ -8,10 +8,11 @@ import SocialGray from '../../../img/SocialGray.svg';
 import HeartGray from '../../../img/HeartGray.svg';
 
 const ItemViewItem = (data: any) => {
-  console.log('c', data);
+  console.log('c', data, data.item.onTime);
 
   const OnPress = () => {
     console.log('press', new Date());
+    data.onPress();
   };
 
   const makedTime = data.item.onTime;
