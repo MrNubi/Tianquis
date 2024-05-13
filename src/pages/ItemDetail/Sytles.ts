@@ -47,12 +47,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  listoText: {
-    textAlign: 'center',
-    color: 'white',
+  descView: {
+    width: '100%',
+    height: 100,
+  },
+  descText: {
+    color: 'Black',
     fontFamily: 'Inter-SemiBold',
+
+    textAlign: 'left',
     fontSize: 15,
-    lineHeight: 18.25,
+    lineHeight: 18,
   },
   TitleText: {
     textAlign: 'left',
