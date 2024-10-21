@@ -60,15 +60,10 @@ const Header = ({spinner, DT, setSpinner, onPressProfile}: props) => {
 
           <Pressable style={styles.distanceBtn} onPress={startAnimation}>
             {/* distance Slide 버튼 */}
-            <Animated.View
-              style={{
-                display: !spinner ? 'flex' : 'none',
-                transform: [{rotate: '270deg'}],
-
-              }}>
+          
               <V />
               {/* spin Btn */}
-            </Animated.View>
+          
           </Pressable>
         </View>
         <View>

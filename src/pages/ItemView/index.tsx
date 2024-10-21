@@ -11,7 +11,9 @@ import Header from '../../component/header/itemViewHeader';
 import SearchBarGray from '../../component/bar/SearchBar';
 import BannerBar from '../../component/bar/BannerBar';
 import {FlashList} from '@shopify/flash-list';
-import ItemViewItem from '../../component/item/ItemViewItem';
+import Home from '../../img/home.svg';
+import Search from '../../img/newSearch.svg';
+import Gem from '../../img/gem.svg';
 import {Data1} from '../../mmkv/data';
 import {Dimensions} from 'react-native';
 import ProgressBarTest from '../../component/bar/ProgressiveBarTest';
@@ -41,6 +43,7 @@ function ItemView({navigation}: ItemViewScreenProps) {
   const widthABS = Math.floor(width);
   console.log(width, widthABS, 'sds');
   const [spinner, setSpinner] = useState(false);
+  const [spinner2, setSpinner2] = useState(false);
   const spinAction = () => {
     setSpinner(p => !p);
     console.log(spinner);
@@ -71,36 +74,20 @@ function ItemView({navigation}: ItemViewScreenProps) {
       {/* header*/}
       <Header
         DT={distanceText}
-        spinner={spinner}
+        spinner={spinner2}
         setSpinner={spinAction}
         onPressProfile={fetchData}
       />
+      <BannerBar />
       {/* searchbar bar */}
       {!spinner ? (
-        <View style={{width: '100%', height: 90}}>
+        <Pressable onPress={spinAction} style={{position:"absolute",top:0,left:0, zIndex:11, width: '70%', backgroundColor:"black", height:"100%" }}>
          
           {/* navigation bar */}
-          <BannerBar />
-        </View>
+          
+        </Pressable >
       ) : (
-        <View style={{justifyContent: 'center', backgroundColor: 'yellow'}}>
-         
-          <ProgressBarTest
-            setDistanceText={t => {
-              setDistanceText(t);
-            }}
-          />
-          <View
-            style={{
-              padding: 20,
-              backgroundColor: 'green',
-              justifyContent: 'center',
-              alignItems: 'center',
-              transform: [{rotate: '180deg'}],
-            }}>
-            <V onPress={spinAction} />
-          </View>
-        </View>
+       <></>
       )}
 
       {/* ItemView */}
@@ -147,7 +134,12 @@ function ItemView({navigation}: ItemViewScreenProps) {
           <View
           style={styles.bottomNavItem}
           >
-
+            <Home/>
+          </View>
+          <View
+          style={styles.bottomNavItem}
+          >
+            <Search/>
           </View>
           <View
           style={styles.bottomNavItem}
@@ -162,12 +154,7 @@ function ItemView({navigation}: ItemViewScreenProps) {
           <View
           style={styles.bottomNavItem}
           >
-
-          </View>
-          <View
-          style={styles.bottomNavItem}
-          >
-
+            <Gem/>
           </View>
 
         </View>
