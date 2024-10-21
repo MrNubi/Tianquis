@@ -16,6 +16,7 @@ import {Data1} from '../../mmkv/data';
 import {Dimensions} from 'react-native';
 import ProgressBarTest from '../../component/bar/ProgressiveBarTest';
 import V from '../../img/V.svg';
+import TestItem from '../../component/item/TestItem';
 
 type ItemViewScreenProps = NativeStackScreenProps<
   RootStackParamList,
@@ -45,6 +46,26 @@ function ItemView({navigation}: ItemViewScreenProps) {
     console.log(spinner);
   };
 
+  const [data, setData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://10.0.2.2/src/json/po.php');
+      if (!response.ok) {
+        throw new Error('네트워크 응답에 문제가 있습니다.');
+      }
+      
+      const json = await response.json();
+      console.log(json)
+      setData(json); // response.body를 data에 저장
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <View style={styles.container}>
       {/* header*/}
@@ -52,28 +73,18 @@ function ItemView({navigation}: ItemViewScreenProps) {
         DT={distanceText}
         spinner={spinner}
         setSpinner={spinAction}
-        onPressProfile={navigateToProfile}
+        onPressProfile={fetchData}
       />
       {/* searchbar bar */}
       {!spinner ? (
         <View style={{width: '100%', height: 90}}>
-          <SearchBarGray
-            placeHolder=""
-            onChangeText={t => setSerchText(t)}
-            onSubmitEditing={() => {
-              console.log('d : ', serchText);
-            }}
-            value={serchText}
-            ref={SearchRef}></SearchBarGray>
+         
           {/* navigation bar */}
           <BannerBar />
         </View>
       ) : (
         <View style={{justifyContent: 'center', backgroundColor: 'yellow'}}>
-          <Text style={styles.distanceText}>
-            ¿Qué tan lejos{`\n`}
-            puedes viajar?
-          </Text>
+         
           <ProgressBarTest
             setDistanceText={t => {
               setDistanceText(t);
@@ -95,18 +106,72 @@ function ItemView({navigation}: ItemViewScreenProps) {
       {/* ItemView */}
       <View
         style={{
+
           width: widthABS,
           height: 500,
           backgroundColor: '#E8E8E8',
           flex: 1,
+      
         }}>
         <FlashList
+          contentContainerStyle={{paddingLeft:10, paddingBottom:5, paddingTop:5}}
           data={Data1}
+          numColumns={3}
           renderItem={({item}) => (
-            <ItemViewItem item={item} onPress={() => navigateToDetailView()} />
+            <TestItem item={item} onPress={() => navigateToDetailView()} />
           )}
           estimatedItemSize={widthABS}
         />
+      </View>
+      <View
+        style={{
+
+          width: widthABS,
+          height: 120,
+          backgroundColor: '#E8E8E8',
+          alignItems:"center",
+          justifyContent:"center"
+        }}
+      >
+          <BannerBar />
+
+        <View
+          style={{
+            width: widthABS,
+            height: 60,
+            backgroundColor:"white",
+            flexDirection:"row",
+            justifyContent:"space-between"
+          }}
+        >
+          <View
+          style={styles.bottomNavItem}
+          >
+
+          </View>
+          <View
+          style={styles.bottomNavItem}
+          >
+
+          </View>
+          <View
+          style={styles.bottomNavItem}
+          >
+
+          </View>
+          <View
+          style={styles.bottomNavItem}
+          >
+
+          </View>
+          <View
+          style={styles.bottomNavItem}
+          >
+
+          </View>
+
+        </View>
+
       </View>
     </View>
   );

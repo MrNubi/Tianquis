@@ -9,7 +9,7 @@ function BannerBar() {
   return (
     <View style={styles.container}>
       <BwGradetion style={{position: 'absolute'}} />
-      <Text style={styles.innerText}>¿Quieres vender algo? haga clic aquí</Text>
+      <Text style={styles.innerText}>Banner</Text>
     </View>
   );
 }

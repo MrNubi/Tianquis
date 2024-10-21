@@ -15,6 +15,8 @@ import Social from '../../../img/Social.svg';
 import Message from '../../../img/Message.svg';
 import styles from './styles';
 import storage from '../../../mmkv';
+import { SearchBar } from 'react-native-screens';
+import SearchBarGray from '../../bar/SearchBar';
 
 interface props {
   spinner: boolean;
@@ -25,6 +27,7 @@ interface props {
 
 const Header = ({spinner, DT, setSpinner, onPressProfile}: props) => {
   const [spinValue] = useState(new Animated.Value(0));
+  const [Text, setText] = useState("")
   const [distasnce, setDistance] = useState(
     storage.getString('distance') ? storage.getString('distance') : '1km',
   );
@@ -46,23 +49,7 @@ const Header = ({spinner, DT, setSpinner, onPressProfile}: props) => {
     outputRange: ['360deg', '180deg'],
   });
 
-  useEffect(() => {
-    let getDistanceCode = DT;
 
-    let DistanceText =
-      getDistanceCode == '0'
-        ? '1km'
-        : getDistanceCode == '1'
-        ? '5km'
-        : getDistanceCode == '2'
-        ? '10km'
-        : getDistanceCode == '3'
-        ? '25km'
-        : getDistanceCode == '4'
-        ? 'unlimitied'
-        : 'error';
-    setDistance(DistanceText);
-  }, [DT]);
 
   return (
     <View style={styles.container1}>
@@ -70,20 +57,31 @@ const Header = ({spinner, DT, setSpinner, onPressProfile}: props) => {
       <View style={styles.innerContainer}>
         {/*아이템 컨테이너*/}
         <View style={{justifyContent: 'flex-start', flexDirection: 'row'}}>
-          <Text style={styles.distanceText}>{`${distasnce}`}</Text>
+
           <Pressable style={styles.distanceBtn} onPress={startAnimation}>
             {/* distance Slide 버튼 */}
             <Animated.View
               style={{
                 display: !spinner ? 'flex' : 'none',
-                //transform: [{rotate: spin}],
+                transform: [{rotate: '270deg'}],
+
               }}>
               <V />
               {/* spin Btn */}
             </Animated.View>
           </Pressable>
         </View>
-
+        <View>
+        <SearchBarGray
+            
+            placeHolder=""
+            onChangeText={t => setText(t)}
+            onSubmitEditing={() => {
+              console.log('d : ', Text);
+            }}
+            value={Text}
+           ></SearchBarGray>
+        </View>
         <View style={{justifyContent: 'flex-start', flexDirection: 'row'}}>
           <Pressable style={styles.distanceBtn}>
             <Message />

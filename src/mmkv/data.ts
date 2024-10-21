@@ -16,7 +16,17 @@ export const Data1 = [
   {title: 'title7', price: 'price4', onTime: date1},
   {title: 'title8', price: 'price4', onTime: date1},
   {title: 'title9', price: 'price4', onTime: date1},
-  {title: 'title10', price: 'price4', onTime: date1},
+  {title: 'title11', price: 'price4', onTime: date1},
+  {title: 'title12', price: 'price4', onTime: date1},
+  {title: 'title13', price: 'price4', onTime: date1},
+  {title: 'title14', price: 'price4', onTime: date1},
+  {title: 'title15', price: 'price4', onTime: date1},
+  {title: 'title16', price: 'price4', onTime: date1},
+  {title: 'title17', price: 'price4', onTime: date1},
+  {title: 'title18', price: 'price4', onTime: date1},
+  {title: 'title19', price: 'price4', onTime: date1},
+  {title: 'title20', price: 'price4', onTime: date1},
+
 ];
 
 export const imageUrlArr = [

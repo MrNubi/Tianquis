@@ -16,10 +16,7 @@ import BlueInput from '../../component/inputBox/BlueInputText';
 import {RootStackParamList} from '../../Layout/AppInner';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import styles from './DistanceStyle';
-import BlueOneInput from '../../component/inputBox/BlueOneTextInput';
-import ProgressBar from '../../component/bar/ProgressBar';
 import BluePin from '../../img/BluePine.svg';
-import DragBox from '../../component/test/DragBox';
 import ProgressBarTest from '../../component/bar/ProgressiveBarTest';
 
 type DistanceScreenProps = NativeStackScreenProps<

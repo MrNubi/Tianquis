@@ -11,6 +11,11 @@ interface props {
   secureTextEntry?: boolean;
   returnKeyType?: string;
   onChangeText: (t: string) => void;
+
+
+
+
+  
   onSubmitEditing: () => void;
   value: string;
 }

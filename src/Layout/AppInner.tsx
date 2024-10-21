@@ -7,6 +7,7 @@ import Distance from '../pages/Distance';
 import ItemView from '../pages/ItemView';
 import ItemDetail from '../pages/ItemDetail';
 import ProfilePage from '../pages/Profile';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 export type RootStackParamList = {
   Main: undefined;
@@ -17,12 +18,19 @@ export type RootStackParamList = {
   Profile: undefined;
 };
 
+
 const AppInner = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
-
+  const Drawer = createDrawerNavigator();
+  
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false, statusBarHidden: true}}>
+        <Stack.Screen
+        name="ItemView"
+        component={ItemView}
+        options={{headerShown: false, statusBarHidden: true}}
+      />
       <Stack.Screen
         name="Main"
         component={Main}
@@ -38,11 +46,7 @@ const AppInner = () => {
         component={Distance}
         options={{headerShown: false, statusBarHidden: true}}
       />
-      <Stack.Screen
-        name="ItemView"
-        component={ItemView}
-        options={{headerShown: false, statusBarHidden: true}}
-      />
+
       <Stack.Screen
         name="ItemDetail"
         component={ItemDetail}

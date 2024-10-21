@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable prettier/prettier */
-import React, {useEffect, useRef, useState} from 'react';
+import  {useEffect, useRef, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -13,6 +13,7 @@ import {
   Pressable,
 } from 'react-native';
 import storage from '../../mmkv';
+import React from 'react';
 
 interface props {
   setDistanceText?: (t: string) => void | undefined;

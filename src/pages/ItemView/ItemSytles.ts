@@ -54,6 +54,13 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 18.25,
   },
+  bottomNavItem:{
+    width:"18%",  
+    height:60, 
+    borderColor:"yellow", 
+    justifyContent:"center",
+    alignItems:"center",
+    borderWidth:1 }
 });
 
 export default styles;

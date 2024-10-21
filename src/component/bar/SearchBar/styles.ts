@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     width: '90%',
     height: 25,
 
-    backgroundColor: '#E8E8E8',
+    backgroundColor: '#bfbfbf',
     borderRadius: 15,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -37,6 +37,7 @@ export const styles = StyleSheet.create({
     padding: 5,
     textAlign: 'center',
     color: 'white',
+    zIndex: 10,
   },
   inputWrapper: {
     padding: 20,
